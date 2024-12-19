@@ -4,11 +4,7 @@ import { useParams } from "react-router-dom";
 import "./Community.scss";
 import Hr from "../components/Hr";
 import Task from "../components/Task";
-import {
-  defineChain,
-  getContract,
-  readContract,
-} from "thirdweb";
+import { defineChain, getContract, readContract } from "thirdweb";
 import { client, deployed } from "../constants";
 import { download } from "thirdweb/storage";
 import { MediaRenderer, useActiveAccount } from "thirdweb/react";
@@ -47,7 +43,7 @@ const MintProfile = ({ communityAddress, animationUrl }) => {
       return;
     }
 
-    alert.info("Minting your NFT");
+    const toastId = alert.loading("Minting your NFT");
 
     try {
       const receipt = await (
@@ -64,10 +60,21 @@ const MintProfile = ({ communityAddress, animationUrl }) => {
 
       console.log(receipt);
       fetchTokenId();
-      alert.success("NFT minted!");
+
+      alert.update(toastId, {
+        render: "NFT minted",
+        type: "success",
+        isLoading: false,
+        autoClose: 1000,
+      });
     } catch (e) {
       console.error(e);
-      alert.error("Could not mint");
+      alert.update(toastId, {
+        render: "Could not mint",
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
     }
   };
 

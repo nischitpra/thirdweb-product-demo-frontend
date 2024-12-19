@@ -135,53 +135,68 @@ export const CreateCommunity = () => {
     if (!nftImage) return alert.error("Nft image is required");
     if (!tasks?.length) return alert.error("Quest is empty");
 
-    alert.info("Creating community");
+    const toastId = alert.loading("Creating community");
 
-    const [logoUrl, nftImageUrl] = await upload({
-      client,
-      files: [logo, nftImage],
-    });
-
-    const data = {
-      name,
-      image: logoUrl,
-      description,
-      animation_url: nftImageUrl,
-      tasks,
-    };
-
-    const tokenUri = await upload({
-      client,
-      files: [data],
-    });
-
-    const transaction = prepareContractCall({
-      contract: getContract({
-        abi: communityFactoryAbi,
-        address: deployed.communityFactory.address,
-        chain: defineChain(deployed.communityFactory.chainId),
+    try {
+      const [logoUrl, nftImageUrl] = await upload({
         client,
-      }),
-      method:
-        "function createCommunity(address _creator, string _name, string _tokenUri)",
-      params: [account.address, data.name, tokenUri],
-    });
-    console.log(
-      tokenUri,
-      account.address,
-      data.name,
-      tokenUri,
-      await transaction.data()
-    );
+        files: [logo, nftImage],
+      });
 
-    const receipt = await sendAndConfirmTransaction({
-      account,
-      transaction,
-    });
+      const data = {
+        name,
+        image: logoUrl,
+        description,
+        animation_url: nftImageUrl,
+        tasks,
+      };
 
-    console.log(receipt);
-    alert.success("Community created");
-    navigate(`/${receipt.logs[0].address}`);
+      const tokenUri = await upload({
+        client,
+        files: [data],
+      });
+
+      const transaction = prepareContractCall({
+        contract: getContract({
+          abi: communityFactoryAbi,
+          address: deployed.communityFactory.address,
+          chain: defineChain(deployed.communityFactory.chainId),
+          client,
+        }),
+        method:
+          "function createCommunity(address _creator, string _name, string _tokenUri)",
+        params: [account.address, data.name, tokenUri],
+      });
+      console.log(
+        tokenUri,
+        account.address,
+        data.name,
+        tokenUri,
+        await transaction.data()
+      );
+
+      const receipt = await sendAndConfirmTransaction({
+        account,
+        transaction,
+      });
+
+      console.log(receipt);
+      alert.update(toastId, {
+        render: "Community created",
+        type: "success",
+        isLoading: false,
+        autoClose: 1000,
+      });
+      navigate(`/${receipt.logs[0].address}`);
+    } catch (e) {
+      console.error(e);
+      alert.update(toastId, {
+        render: "Could not create community",
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
+    }
   };
 
   return (
