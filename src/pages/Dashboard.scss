@@ -1,0 +1,39 @@
+.Dashboard-container {
+  .communities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .CommunityCard-container {
+    background-color: #eeeeee;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .background {
+      background-color: #00796b;
+      height: 240px;
+      display: flex;
+      align-items: end;
+      position: relative;
+      .banner {
+        width: 100%;
+        object-fit: cover !important;
+        position: absolute;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0px;
+        padding: 1rem;
+        z-index: 1;
+        color: white;
+      }
+    }
+    p {
+      padding: 1rem;
+    }
+    footer {
+      padding: 1rem;
+    }
+  }
+}

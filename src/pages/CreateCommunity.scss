@@ -1,0 +1,50 @@
+.Input-container {
+  margin-bottom: 1rem;
+  h1 {
+    font-size: 0.8rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.TaskEdit-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .Task-container {
+    margin-bottom: 0;
+  }
+
+  button.delete {
+    background-color: red;
+    color: white;
+    font-weight: 800;
+  }
+  button.delete:hover {
+    opacity: 0.6;
+  }
+}
+
+.CreateCommunity-container {
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
+
+  button.create-community {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: #1e88e5;
+    color: white;
+  }
+  button.create-community:hover {
+    opacity: 0.6;
+  }
+}

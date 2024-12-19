@@ -1,0 +1,30 @@
+.MintProfile-container {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 2rem;
+  }
+  .nft-preview {
+    width: 100%;
+    flex: 1;
+    object-fit: cover !important;
+  }
+  button {
+    width: 100%;
+    font-size: 1.25rem;
+    padding: 1rem;
+  }
+}
+
+.Community-container {
+  header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    p {
+      line-height: 1.6;
+    }
+  }
+}

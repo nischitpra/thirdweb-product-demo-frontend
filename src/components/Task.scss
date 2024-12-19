@@ -1,0 +1,27 @@
+.Task-container {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .task-details {
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      line-height: 1.6rem;
+    }
+  }
+  a {
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    background-color: #3949ab;
+    color: white;
+    border-radius: 4px;
+    text-wrap: nowrap;
+    text-decoration: none;
+  }
+  a:hover {
+    opacity: 0.6;
+  }
+}
