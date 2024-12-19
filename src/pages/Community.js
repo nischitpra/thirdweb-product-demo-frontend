@@ -51,7 +51,7 @@ const MintProfile = ({ communityAddress, animationUrl }) => {
 
     try {
       const receipt = await (
-        await fetch("http://localhost:3001/mint", {
+        await fetch("https://thirdweb-product-demo-backend.onrender.com/mint", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
