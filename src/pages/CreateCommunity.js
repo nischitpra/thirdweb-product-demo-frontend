@@ -212,7 +212,7 @@ export const CreateCommunity = () => {
       <Hr />
 
       <button className="create-community" onClick={createCommunity}>
-        Create Community
+        Create Community (In App Wallet needs ETH in Holesky)
       </button>
     </section>
   );
