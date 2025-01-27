@@ -16,6 +16,8 @@ import { defineChain } from "thirdweb/chains";
 import { useActiveAccount } from "thirdweb/react";
 import { communityFactoryAbi } from "../abi/Abi";
 import { useNavigate } from "react-router-dom";
+import { setThirdwebDomains } from "thirdweb/utils";
+setThirdwebDomains({ storage: "storage.preview.thirdweb.com" });
 
 const Input = (props) => {
   return (
@@ -199,11 +201,24 @@ export const CreateCommunity = () => {
     }
   };
 
+  const testUpload = async () => {
+    const logo = getElementValue("input.createCommunity.logo", "files")[0];
+    if (!logo) return alert.error("Logo is required");
+
+    const uploadResponse = await upload({
+      client,
+      files: [logo],
+      uploadWithoutDirectory: true
+    });
+    console.log(uploadResponse);
+  };
+
   return (
     <section className="CreateCommunity-container">
       <h1>Create Your Community</h1>
 
       <Input id="input.createCommunity.logo" label="Logo" type="file" />
+      <button onClick={testUpload}>Test Upload</button>
       <Input
         id="input.createCommunity.name"
         label="Name"
